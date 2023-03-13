@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@rive-app/canvas": "^1.0.102",
     "vue": "^3.2.45"
   },
   "devDependencies": {
