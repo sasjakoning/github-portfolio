@@ -2,14 +2,15 @@
     defineProps<{
         content: string;
         url: string;
+        hash: string;
     }>()
 </script>
 
 <template>
-    <a href="">
+    <router-link :to="hash">
         <img :src="url" alt="">
         <p>{{ content }}</p>
-    </a>
+    </router-link>
 </template>
 
 <style scoped>
