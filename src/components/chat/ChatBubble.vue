@@ -1,44 +1,54 @@
 <script setup lang="ts">
+    import { ref, defineProps, computed } from 'vue'
+    import textContent from '../../assets/textContentGithub.json'
 
-    import { ref } from 'vue'
-
-    const content = ref(null);
+    const content = ref('')
+    
+    enum ChatDirection {
+        ChatLeft = 'chat-left',
+        ChatRight = 'chat-right',
+        ChatNeutral = 'chat-neutral'
+    }
     
     const props = defineProps<{
-        chatDirection: string;
-        content: string;
+        chatDirection: ChatDirection;
+        type: string;
     }>()
     
-    function getImageUrl(name, fileType) {
+    function getImageUrl(name: string, fileType: string): string {
         return new URL(`../../assets/${name}.${fileType}`, import.meta.url).href
-    }  
+    }
     
-    const getClass = () => {
-        if(props.chatDirection == 'chat-left') {
-            return 'chat-left order-2'
-        } else if(props.chatDirection == 'chat-right') {
-            return 'chat-right order-1'
-        } else {
-            return 'chat-neutral'
+    const getClass = computed(() => {
+        switch (props.chatDirection) {
+            case ChatDirection.ChatLeft:
+                return 'chat-left'
+            case ChatDirection.ChatRight:
+                return 'chat-right'
+            default:
+                return 'chat-neutral'
         }
-    }
+    })
 
-    const getSrc = () => {
-        if(props.chatDirection == 'chat-left') {
-            return getImageUrl('persona-icon', 'svg')
-        } else if(props.chatDirection == 'chat-right') {
-            return getImageUrl('user-icon', 'svg')
-        } else {
-            return 'https://unsplash.it/640/425'
+    const getSrc = computed(() => {
+        switch (props.chatDirection) {
+            case ChatDirection.ChatLeft:
+                return getImageUrl('persona-icon', 'svg')
+            case ChatDirection.ChatRight:
+                return getImageUrl('user-icon', 'svg')
+            default:
+                return 'https://unsplash.it/640/425'
         }
-    }
+    })
+
+    content.value = textContent[props.type] || '';
+    console.log(content.value)
 </script>
-
 <template>
-    <section>
-        <img :src="getSrc()" alt="">
-        <div :class="getClass()">
-            <p ref="content">{{ content }}</p>
+    <section :class="getClass">
+        <img :src="getSrc" alt="">
+        <div>
+            <p>{{ content }}</p>
         </div>
     </section>
 </template>
@@ -68,23 +78,25 @@
         padding: 1rem;
     }
 
-    .order-1 {
-        order: 1;
-    }
-
-    .order-2 {
+    .chat-left > div {
+        border-radius: 0 1rem 1rem 1rem;
         order: 2;
     }
 
-    .chat-left {
-        border-radius: 0 1rem 1rem 1rem;
+    .chat-left > img {
+        order: 1;
     }
 
-    .chat-right {
+    .chat-right > div {
         border-radius: 1rem 0 1rem 1rem;
+        order: 1;
     }
 
-    .chat-neutral {
+    .chat-right > img {
+        order: 2;
+    }
+
+    .chat-neutral > div {
         border-radius: 1rem;
     }
     

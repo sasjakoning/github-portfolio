@@ -1,0 +1,10 @@
+{
+  "userQuestion": "Are you on Github?",
+  "BotAnswer": "Yes I am! What are you interersted in?",
+  "userOptions": {
+    "option-1": "I want to see your repositories",	
+    "option-2": "I want to see your commits",
+    "option-3": "I want to see your activity",
+    "option-4": "I want to see your issues"
+  }
+}

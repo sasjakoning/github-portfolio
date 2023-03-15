@@ -14,9 +14,9 @@
 <template>
 
     <article class="slide-in-left" v-if="topic === 'github'">
-        <chatBubble chatDirection="chat-right" content="smth"/>
-        <chatBubble chatDirection="chat-left" content="smth"/>
-        <chatBubble chatDirection="chat-right" content="smth"/>
+        <chatBubble chatDirection="chat-right" type="userQuestion"/>
+        <chatBubble chatDirection="chat-left" type="BotAnswer"/>
+        <chatBubble chatDirection="chat-right" type="userOptions"/>
 
         <p>{{ topic }}</p>
     </article>
