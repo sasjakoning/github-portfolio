@@ -2,6 +2,8 @@
 
     import btnQuestion from './BtnQuestion.vue'
 
+
+
 </script>
 
 <template>
@@ -10,38 +12,27 @@
         <header>
             <img src="https://unsplash.it/640/425" alt="">
             <div>
-                <h1>Sasja Koning</h1>
+                <h1>Name Name</h1>
                 <p>Front-end, Design, Illustration</p>
             </div>
         </header>
 
         <section>
             <h2>Ask me something...</h2>
-            <btnQuestion content="What are your skills?" url="https://unsplash.it/640/425" />
-            <btnQuestion content="More about yourself" url="https://unsplash.it/640/425" />
-            <btnQuestion content="Are you on Github?" url="https://unsplash.it/640/425" />
-            <btnQuestion content="What's your experience?" url="https://unsplash.it/640/425" />
+            <btnQuestion hash="/chat/skills" content="What are your skills?" url="https://unsplash.it/640/425" />
+            <btnQuestion hash="/chat/about" content="More about yourself" url="https://unsplash.it/640/425" />
+            <btnQuestion hash="/chat/github" content="Are you on Github?" url="https://unsplash.it/640/425" />
+            <btnQuestion hash="/chat/experience" content="What's your experience?" url="https://unsplash.it/640/425" />
 
         </section>
     </article>
+
+    <router-view></router-view>
 
 </template>
 
 
 <style scoped>
-
-    article {
-        width: 100%;
-        height: 100dvh;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        overflow-y: scroll;
-
-        background: var(--light-100);
-
-        padding: 2rem;
-    }
 
     header {
         display: flex;
