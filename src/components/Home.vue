@@ -19,10 +19,10 @@
 
         <section>
             <h2>Ask me something...</h2>
-            <btnQuestion hash="/chat/skills" content="What are your skills?" url="https://unsplash.it/640/425" />
-            <btnQuestion hash="/chat/about" content="More about yourself" url="https://unsplash.it/640/425" />
-            <btnQuestion hash="/chat/github" content="Are you on Github?" url="https://unsplash.it/640/425" />
-            <btnQuestion hash="/chat/experience" content="What's your experience?" url="https://unsplash.it/640/425" />
+            <btnQuestion hash="/chat/skills" imageLink="https://unsplash.it/640/425">What are your skills?</btnQuestion>
+            <btnQuestion hash="/chat/about" imageLink="https://unsplash.it/640/425">More about yourself</btnQuestion>
+            <btnQuestion hash="/chat/github" imageLink="https://unsplash.it/640/425">Are you on Github?</btnQuestion>
+            <btnQuestion hash="/chat/experience" imageLink="https://unsplash.it/640/425">What's your experience?</btnQuestion>
 
         </section>
     </article>

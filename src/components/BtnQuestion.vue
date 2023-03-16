@@ -1,15 +1,23 @@
 <script setup lang="ts">
-    defineProps<{
-        content: string;
-        url: string;
-        hash: string;
-    }>()
+
+    import { defineProps, onMounted } from 'vue'
+
+
+    const props = defineProps({
+        imageLink: { type: String, default: '', required: false },
+        hash: { type: String, required: true}
+    })
+
+    onMounted(() => {
+        console.log(props.imageLink)
+    })
+
 </script>
 
 <template>
     <router-link :to="hash">
-        <img :src="url" alt="">
-        <p>{{ content }}</p>
+        <img v-if="imageLink != ''" :src="imageLink" alt="">
+        <p><slot></slot></p>
     </router-link>
 </template>
 

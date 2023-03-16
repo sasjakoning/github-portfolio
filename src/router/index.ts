@@ -14,6 +14,12 @@ const routes = [
         props: true,
         component: Chat
     },
+    {
+        path: '/chat/:topic/:id',
+        name: 'ChatId',
+        props: true,
+        component: Chat
+    },
 ]
 
 const router = createRouter({

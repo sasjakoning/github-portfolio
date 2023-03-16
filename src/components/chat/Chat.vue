@@ -2,7 +2,7 @@
     import chatBubble from './ChatBubble.vue'
     import { defineProps, onMounted } from 'vue'
 
-    const props = defineProps(['topic'])
+    const props = defineProps(['topic', 'id'])
 
     onMounted(() => {
         console.log(props.topic)
@@ -17,9 +17,11 @@
         <chatBubble chatDirection="chat-right" type="userQuestion"/>
         <chatBubble chatDirection="chat-left" type="BotAnswer"/>
         <chatBubble chatDirection="chat-right" type="userOptions"/>
-
-        <p>{{ topic }}</p>
+        <div v-if="topic === 'github' && id === 'repositories'">
+            <chatBubble chatDirection="chat-left" type="botAnswer-option-1"/>
+        </div>
     </article>
+
 
 </template>
 

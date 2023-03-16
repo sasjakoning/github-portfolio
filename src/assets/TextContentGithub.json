@@ -1,10 +1,23 @@
 {
   "userQuestion": "Are you on Github?",
-  "BotAnswer": "Yes I am! What are you interersted in?",
+  "BotAnswer": "Yes I am! What are you interested in?",
   "userOptions": {
-    "option-1": "I want to see your repositories",	
-    "option-2": "I want to see your commits",
-    "option-3": "I want to see your activity",
-    "option-4": "I want to see your issues"
-  }
+    "option-1": {
+      "content": "I want to see your repositories",
+      "link": "/chat/github/repositories"
+    },	
+    "option-2": {
+      "content": "I want to see your commits",
+      "link": "/chat/github/commits"
+    },
+    "option-3": {
+      "content": "I want to see your activity",
+      "link": "/chat/github/activity"
+    },
+    "option-4": {
+      "content": "I want to see your issues",
+      "link": "/chat/github/issues"
+    }
+  },
+  "botAnswer-option-1": "Here are my repositories:"
 }
