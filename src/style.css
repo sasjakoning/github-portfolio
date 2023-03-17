@@ -1,75 +1,87 @@
 :root {
-	--background: hsl(204, 92%, 3%);
-	--primary: hsl(46, 13%, 77%);
-	--accent: hsl(174, 41%, 57%);
-	--text: hsl(0, 0%, 6%);
-	--shadow: hsl(348, 13%, 62%);
-
-	--rotateX: 0deg;
-	--rotateY: 0deg;
+  --white: #fff;
+  --light-100: #F8F9FA;
+  --light-200: #DBE0E5;
+  --light-300: #BEC7D0;
+  --light-400: #677A8E;
+  --accent-1: #5800FF;
+  --accent-2: #E900FF;
+  --accent-3: #FFAA00;
+  --dark: #111418;
 }
 
-/* a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* css reset */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  background: var(--light-100);
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: var(--dark);
+
+  width: 100dvw;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: var(--dark);
+}
+
+img {
+  max-width: 100%;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 2rem;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-.card {
-  padding: 2em;
+h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
+p {
+  line-height: 160%;
+}
+
+body > div {
+  display: flex;
+  justify-content: center;
+}
+
+article {
+  width: clamp(10rem, 100%, 30rem);
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: scroll;
+
+  position: absolute;
+  transform: translate(0,0);
+
+  background: var(--light-100);
+
   padding: 2rem;
-  text-align: center;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.slide-in-left {
+  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100%);
   }
-  a:hover {
-    color: #747bff;
+  100% {
+    transform: translateX(0);
   }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
+}
