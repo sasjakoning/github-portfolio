@@ -2,10 +2,10 @@
     import chatBubble from './ChatBubble.vue'
     import { defineProps, onMounted } from 'vue'
 
-    const props = defineProps(['topic', 'id'])
+    const props = defineProps(['topic', 'id', 'name'])
 
     onMounted(() => {
-        console.log(props.topic)
+        console.log(props.name)
     })
 
 
@@ -14,12 +14,17 @@
 <template>
 
     <article class="slide-in-left" v-if="topic === 'github'">
-        <chatBubble chatDirection="chat-right" type="userQuestion"/>
-        <chatBubble chatDirection="chat-left" type="BotAnswer"/>
-        <chatBubble chatDirection="chat-right" type="userOptions"/>
+        <chatBubble :repoName="name" chatDirection="chat-right" type="userQuestion"/>
+        <chatBubble :repoName="name" chatDirection="chat-left" type="BotAnswer"/>
+        <chatBubble :repoName="name" chatDirection="chat-right" type="userOptions"/>
         <div v-if="topic === 'github' && id === 'repositories'">
-            <chatBubble chatDirection="chat-left" type="botAnswer-option-1"/>
+            <chatBubble :repoName="name" chatDirection="chat-left" type="botAnswer-option-1"/>
         </div>
+    </article>
+
+    <article class="" v-if="topic === 'github' && id === 'commits'">
+        <chatBubble :repoName="name" chatDirection="chat-right" type="userQuestion-commits"/>
+        <chatBubble :repoName="name" chatDirection="chat-left" type="botAnswer-commits"/>
     </article>
 
 

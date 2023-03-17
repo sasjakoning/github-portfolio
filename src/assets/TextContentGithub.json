@@ -19,5 +19,7 @@
       "link": "/chat/github/issues"
     }
   },
-  "botAnswer-option-1": "Here are my repositories:"
+  "botAnswer-option-1": "Here are my repositories:",
+  "userQuestion-commits": "Show the the commits for",
+  "botAnswer-commits": "These are the latest commits for"
 }

@@ -2,20 +2,23 @@
     import { ref, defineProps, computed, onMounted } from 'vue'
     import textContent from '../../assets/textContentGithub.json'
     import BtnQuestion from '../btnQuestion.vue'
+    import api from '../../modules/api'
 
     enum ChatDirection {
         ChatLeft = 'chat-left',
         ChatRight = 'chat-right',
         ChatNeutral = 'chat-neutral'
     }
-    
+
     const props = defineProps<{
         chatDirection: ChatDirection;
         type: String;
+        repoName: String;
     }>()
 
     const content = ref('')
     const userRepos = ref(null)
+    const userRepoCommits = ref(null)
     const chatType = ref(props.type)
 
     
@@ -45,18 +48,6 @@
         }
     })
 
-    async function getUserRepos() {
-        try {
-            const url = `https://api.github.com/users/sasjakoning/repos`;
-            const response = await fetch(url);
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error(error);
-            return [];
-        }
-    }
-
     content.value = textContent[props.type] || '';
 
     const userOptions = computed(() => {
@@ -68,15 +59,18 @@
 
     onMounted(async () => {
         if(props.type == 'botAnswer-option-1'){
-            userRepos.value = await getUserRepos();
+            userRepos.value = await api.getUserRepos();
             console.log("userRepos.value")
             console.log(userRepos.value[1].html_url)
+        }else if(props.type == 'botAnswer-commits'){
+            userRepoCommits.value = await api.getRepoCommits(props.repoName);
         }
+
+        console.log(props.name)
     })
 
-
-        
 </script>
+
 <template>
     <section :class="getClass">
         <img :src="getSrc" alt="">
@@ -95,9 +89,36 @@
             <ul v-else-if="chatType == 'botAnswer-option-1'">
                 <li>{{ content }}</li>
                 <li v-for="repo in userRepos" :key="repo.id">
-                    <a :href="repo.html_url" target="_blank">{{ repo.name }}</a>
+                    <details>
+                        <summary><h4>{{ repo.name }}</h4></summary>
+                        <ul>
+                            <li>
+                                <a :href="repo.html_url" target="_blank">Visit repository</a>
+                            </li>
+                            <li>
+                                <a :href="`/chat/github/commits/${repo.name}`">View commits</a>
+                            </li>
+                            <li>
+                                <a href="">View issues</a>
+                            </li>
+                        </ul>
+                    </details>
                 </li>
             </ul>
+            <section v-else-if="chatType == 'botAnswer-commits'" class="commits">
+                <p>{{ content }}</p>
+                <ul v-for="commit in userRepoCommits" :key="commit.id">
+                    <li>
+                        <a :href="commit.html_url">
+                            <p>{{ commit.commit.message }}</p>
+                            <div>
+                                <p>By: {{ commit.commit.author.name }}</p>
+                                <p>On: {{ commit.commit.author.date }}</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </section>
             <p v-else>{{ content }}</p>
         </div>
     </section>
@@ -147,6 +168,54 @@
         padding: 1rem;
     }
 
+    summary {
+        position: relative;
+        list-style: none;
+    }
+
+    summary::after {
+        content: "";
+        position: absolute;
+        width: .5rem;
+        height: .5rem;
+        border-right: 2px solid var(--light-400);
+        border-top: 2px solid var(--light-400);
+        rotate: 45deg;
+        right: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+        transform-origin: center top;
+        transition: rotate .2s;
+    }
+
+    details[open] > summary::after {
+        transition: rotate .2s;
+        rotate: 135deg;
+    }
+
+    summary::marker {
+        display: none;
+    }
+
+    .commits {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .commits ul > li p {
+        margin-bottom: .5rem;
+    }
+
+    .commits ul > li div {
+        display: flex;
+        gap: 1rem;
+        font-size: .625rem;
+    }
+
+    details ul {
+        margin-top: 1rem;
+    }
     .chat-left > div {
         border-radius: 0 1rem 1rem 1rem;
         order: 2;
